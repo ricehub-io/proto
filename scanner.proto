@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package scanner;
+option go_package = "./proto";
+
+service Scanner {
+  rpc ScanFile(ScanRequest) returns (ScanResult);
+}
+
+message ScanRequest {
+  string file_path = 1;
+}
+
+message ScanResult {
+  bool is_malicious = 1;
+  repeated string reason = 2;
+}
