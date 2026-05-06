@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package scanner.v1;
+option go_package = "github.com/ricehub-io/proto/gen/go/scanner/v1;scannerv1";
+
+service ScannerService {
+  rpc ScanFile(ScanRequest) returns (ScanResponse);
+}
+
+message ScanRequest {
+  string file_path = 1;
+}
+
+message ScanResponse {
+  bool is_malicious = 1;
+  repeated string reason = 2;
+}
