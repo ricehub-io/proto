@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ScannerServiceClient interface {
-	ScanFile(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (*ScanResponse, error)
+	ScanFile(ctx context.Context, in *ScanFileRequest, opts ...grpc.CallOption) (*ScanFileResponse, error)
 }
 
 type scannerServiceClient struct {
@@ -37,9 +37,9 @@ func NewScannerServiceClient(cc grpc.ClientConnInterface) ScannerServiceClient {
 	return &scannerServiceClient{cc}
 }
 
-func (c *scannerServiceClient) ScanFile(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (*ScanResponse, error) {
+func (c *scannerServiceClient) ScanFile(ctx context.Context, in *ScanFileRequest, opts ...grpc.CallOption) (*ScanFileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ScanResponse)
+	out := new(ScanFileResponse)
 	err := c.cc.Invoke(ctx, ScannerService_ScanFile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *scannerServiceClient) ScanFile(ctx context.Context, in *ScanRequest, op
 // All implementations should embed UnimplementedScannerServiceServer
 // for forward compatibility.
 type ScannerServiceServer interface {
-	ScanFile(context.Context, *ScanRequest) (*ScanResponse, error)
+	ScanFile(context.Context, *ScanFileRequest) (*ScanFileResponse, error)
 }
 
 // UnimplementedScannerServiceServer should be embedded to have
@@ -61,7 +61,7 @@ type ScannerServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedScannerServiceServer struct{}
 
-func (UnimplementedScannerServiceServer) ScanFile(context.Context, *ScanRequest) (*ScanResponse, error) {
+func (UnimplementedScannerServiceServer) ScanFile(context.Context, *ScanFileRequest) (*ScanFileResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ScanFile not implemented")
 }
 func (UnimplementedScannerServiceServer) testEmbeddedByValue() {}
@@ -85,7 +85,7 @@ func RegisterScannerServiceServer(s grpc.ServiceRegistrar, srv ScannerServiceSer
 }
 
 func _ScannerService_ScanFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ScanRequest)
+	in := new(ScanFileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ func _ScannerService_ScanFile_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: ScannerService_ScanFile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScannerServiceServer).ScanFile(ctx, req.(*ScanRequest))
+		return srv.(ScannerServiceServer).ScanFile(ctx, req.(*ScanFileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

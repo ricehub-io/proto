@@ -4,8 +4,16 @@ package payment.v1;
 option go_package = "github.com/ricehub-io/proto/gen/go/payment/v1;paymentv1";
 
 service PaymentService {
-  rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
+  rpc CreateCheckout(CreateCheckoutRequest) returns (CreateCheckoutResponse);
 }
 
-message CreatePaymentRequest {}
-message CreatePaymentResponse {}
+message CreateCheckoutRequest {
+  // User ID to which checkout should be assigned.
+  string user_id = 1;
+
+  // Polar product ID for which checkout should be created.
+  string product_id = 2;
+}
+message CreateCheckoutResponse {
+  string checkout_url = 1;
+}

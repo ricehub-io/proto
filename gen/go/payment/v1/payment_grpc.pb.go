@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PaymentService_CreatePayment_FullMethodName = "/payment.v1.PaymentService/CreatePayment"
+	PaymentService_CreateCheckout_FullMethodName = "/payment.v1.PaymentService/CreateCheckout"
 )
 
 // PaymentServiceClient is the client API for PaymentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PaymentServiceClient interface {
-	CreatePayment(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error)
+	CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*CreateCheckoutResponse, error)
 }
 
 type paymentServiceClient struct {
@@ -37,10 +37,10 @@ func NewPaymentServiceClient(cc grpc.ClientConnInterface) PaymentServiceClient {
 	return &paymentServiceClient{cc}
 }
 
-func (c *paymentServiceClient) CreatePayment(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error) {
+func (c *paymentServiceClient) CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*CreateCheckoutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreatePaymentResponse)
-	err := c.cc.Invoke(ctx, PaymentService_CreatePayment_FullMethodName, in, out, cOpts...)
+	out := new(CreateCheckoutResponse)
+	err := c.cc.Invoke(ctx, PaymentService_CreateCheckout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *paymentServiceClient) CreatePayment(ctx context.Context, in *CreatePaym
 // All implementations should embed UnimplementedPaymentServiceServer
 // for forward compatibility.
 type PaymentServiceServer interface {
-	CreatePayment(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error)
+	CreateCheckout(context.Context, *CreateCheckoutRequest) (*CreateCheckoutResponse, error)
 }
 
 // UnimplementedPaymentServiceServer should be embedded to have
@@ -61,8 +61,8 @@ type PaymentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPaymentServiceServer struct{}
 
-func (UnimplementedPaymentServiceServer) CreatePayment(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreatePayment not implemented")
+func (UnimplementedPaymentServiceServer) CreateCheckout(context.Context, *CreateCheckoutRequest) (*CreateCheckoutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateCheckout not implemented")
 }
 func (UnimplementedPaymentServiceServer) testEmbeddedByValue() {}
 
@@ -84,20 +84,20 @@ func RegisterPaymentServiceServer(s grpc.ServiceRegistrar, srv PaymentServiceSer
 	s.RegisterService(&PaymentService_ServiceDesc, srv)
 }
 
-func _PaymentService_CreatePayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreatePaymentRequest)
+func _PaymentService_CreateCheckout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCheckoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServiceServer).CreatePayment(ctx, in)
+		return srv.(PaymentServiceServer).CreateCheckout(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PaymentService_CreatePayment_FullMethodName,
+		FullMethod: PaymentService_CreateCheckout_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServiceServer).CreatePayment(ctx, req.(*CreatePaymentRequest))
+		return srv.(PaymentServiceServer).CreateCheckout(ctx, req.(*CreateCheckoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -110,8 +110,8 @@ var PaymentService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PaymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreatePayment",
-			Handler:    _PaymentService_CreatePayment_Handler,
+			MethodName: "CreateCheckout",
+			Handler:    _PaymentService_CreateCheckout_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

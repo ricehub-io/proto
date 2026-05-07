@@ -21,26 +21,30 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CreatePaymentRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+type CreateCheckoutRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// User ID to which checkout should be assigned.
+	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// Polar product ID for which checkout should be created.
+	ProductId     string `protobuf:"bytes,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreatePaymentRequest) Reset() {
-	*x = CreatePaymentRequest{}
+func (x *CreateCheckoutRequest) Reset() {
+	*x = CreateCheckoutRequest{}
 	mi := &file_payment_v1_payment_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreatePaymentRequest) String() string {
+func (x *CreateCheckoutRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreatePaymentRequest) ProtoMessage() {}
+func (*CreateCheckoutRequest) ProtoMessage() {}
 
-func (x *CreatePaymentRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateCheckoutRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_v1_payment_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -52,31 +56,46 @@ func (x *CreatePaymentRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreatePaymentRequest.ProtoReflect.Descriptor instead.
-func (*CreatePaymentRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateCheckoutRequest.ProtoReflect.Descriptor instead.
+func (*CreateCheckoutRequest) Descriptor() ([]byte, []int) {
 	return file_payment_v1_payment_proto_rawDescGZIP(), []int{0}
 }
 
-type CreatePaymentResponse struct {
+func (x *CreateCheckoutRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *CreateCheckoutRequest) GetProductId() string {
+	if x != nil {
+		return x.ProductId
+	}
+	return ""
+}
+
+type CreateCheckoutResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	CheckoutUrl   string                 `protobuf:"bytes,1,opt,name=checkout_url,json=checkoutUrl,proto3" json:"checkout_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreatePaymentResponse) Reset() {
-	*x = CreatePaymentResponse{}
+func (x *CreateCheckoutResponse) Reset() {
+	*x = CreateCheckoutResponse{}
 	mi := &file_payment_v1_payment_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreatePaymentResponse) String() string {
+func (x *CreateCheckoutResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreatePaymentResponse) ProtoMessage() {}
+func (*CreateCheckoutResponse) ProtoMessage() {}
 
-func (x *CreatePaymentResponse) ProtoReflect() protoreflect.Message {
+func (x *CreateCheckoutResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_v1_payment_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -88,9 +107,16 @@ func (x *CreatePaymentResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreatePaymentResponse.ProtoReflect.Descriptor instead.
-func (*CreatePaymentResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateCheckoutResponse.ProtoReflect.Descriptor instead.
+func (*CreateCheckoutResponse) Descriptor() ([]byte, []int) {
 	return file_payment_v1_payment_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateCheckoutResponse) GetCheckoutUrl() string {
+	if x != nil {
+		return x.CheckoutUrl
+	}
+	return ""
 }
 
 var File_payment_v1_payment_proto protoreflect.FileDescriptor
@@ -98,11 +124,15 @@ var File_payment_v1_payment_proto protoreflect.FileDescriptor
 const file_payment_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	"\x18payment/v1/payment.proto\x12\n" +
-	"payment.v1\"\x16\n" +
-	"\x14CreatePaymentRequest\"\x17\n" +
-	"\x15CreatePaymentResponse2f\n" +
-	"\x0ePaymentService\x12T\n" +
-	"\rCreatePayment\x12 .payment.v1.CreatePaymentRequest\x1a!.payment.v1.CreatePaymentResponseB9Z7github.com/ricehub-io/proto/gen/go/payment/v1;paymentv1b\x06proto3"
+	"payment.v1\"O\n" +
+	"\x15CreateCheckoutRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x02 \x01(\tR\tproductId\";\n" +
+	"\x16CreateCheckoutResponse\x12!\n" +
+	"\fcheckout_url\x18\x01 \x01(\tR\vcheckoutUrl2i\n" +
+	"\x0ePaymentService\x12W\n" +
+	"\x0eCreateCheckout\x12!.payment.v1.CreateCheckoutRequest\x1a\".payment.v1.CreateCheckoutResponseB9Z7github.com/ricehub-io/proto/gen/go/payment/v1;paymentv1b\x06proto3"
 
 var (
 	file_payment_v1_payment_proto_rawDescOnce sync.Once
@@ -118,12 +148,12 @@ func file_payment_v1_payment_proto_rawDescGZIP() []byte {
 
 var file_payment_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_payment_v1_payment_proto_goTypes = []any{
-	(*CreatePaymentRequest)(nil),  // 0: payment.v1.CreatePaymentRequest
-	(*CreatePaymentResponse)(nil), // 1: payment.v1.CreatePaymentResponse
+	(*CreateCheckoutRequest)(nil),  // 0: payment.v1.CreateCheckoutRequest
+	(*CreateCheckoutResponse)(nil), // 1: payment.v1.CreateCheckoutResponse
 }
 var file_payment_v1_payment_proto_depIdxs = []int32{
-	0, // 0: payment.v1.PaymentService.CreatePayment:input_type -> payment.v1.CreatePaymentRequest
-	1, // 1: payment.v1.PaymentService.CreatePayment:output_type -> payment.v1.CreatePaymentResponse
+	0, // 0: payment.v1.PaymentService.CreateCheckout:input_type -> payment.v1.CreateCheckoutRequest
+	1, // 1: payment.v1.PaymentService.CreateCheckout:output_type -> payment.v1.CreateCheckoutResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

@@ -21,27 +21,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ScanRequest struct {
+type ScanFileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FilePath      string                 `protobuf:"bytes,1,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ScanRequest) Reset() {
-	*x = ScanRequest{}
+func (x *ScanFileRequest) Reset() {
+	*x = ScanFileRequest{}
 	mi := &file_scanner_v1_scanner_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ScanRequest) String() string {
+func (x *ScanFileRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ScanRequest) ProtoMessage() {}
+func (*ScanFileRequest) ProtoMessage() {}
 
-func (x *ScanRequest) ProtoReflect() protoreflect.Message {
+func (x *ScanFileRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_scanner_v1_scanner_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,19 +53,19 @@ func (x *ScanRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ScanRequest.ProtoReflect.Descriptor instead.
-func (*ScanRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ScanFileRequest.ProtoReflect.Descriptor instead.
+func (*ScanFileRequest) Descriptor() ([]byte, []int) {
 	return file_scanner_v1_scanner_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ScanRequest) GetFilePath() string {
+func (x *ScanFileRequest) GetFilePath() string {
 	if x != nil {
 		return x.FilePath
 	}
 	return ""
 }
 
-type ScanResponse struct {
+type ScanFileResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IsMalicious   bool                   `protobuf:"varint,1,opt,name=is_malicious,json=isMalicious,proto3" json:"is_malicious,omitempty"`
 	Reason        []string               `protobuf:"bytes,2,rep,name=reason,proto3" json:"reason,omitempty"`
@@ -73,20 +73,20 @@ type ScanResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ScanResponse) Reset() {
-	*x = ScanResponse{}
+func (x *ScanFileResponse) Reset() {
+	*x = ScanFileResponse{}
 	mi := &file_scanner_v1_scanner_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ScanResponse) String() string {
+func (x *ScanFileResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ScanResponse) ProtoMessage() {}
+func (*ScanFileResponse) ProtoMessage() {}
 
-func (x *ScanResponse) ProtoReflect() protoreflect.Message {
+func (x *ScanFileResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_scanner_v1_scanner_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -98,19 +98,19 @@ func (x *ScanResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ScanResponse.ProtoReflect.Descriptor instead.
-func (*ScanResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ScanFileResponse.ProtoReflect.Descriptor instead.
+func (*ScanFileResponse) Descriptor() ([]byte, []int) {
 	return file_scanner_v1_scanner_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ScanResponse) GetIsMalicious() bool {
+func (x *ScanFileResponse) GetIsMalicious() bool {
 	if x != nil {
 		return x.IsMalicious
 	}
 	return false
 }
 
-func (x *ScanResponse) GetReason() []string {
+func (x *ScanFileResponse) GetReason() []string {
 	if x != nil {
 		return x.Reason
 	}
@@ -122,14 +122,14 @@ var File_scanner_v1_scanner_proto protoreflect.FileDescriptor
 const file_scanner_v1_scanner_proto_rawDesc = "" +
 	"\n" +
 	"\x18scanner/v1/scanner.proto\x12\n" +
-	"scanner.v1\"*\n" +
-	"\vScanRequest\x12\x1b\n" +
-	"\tfile_path\x18\x01 \x01(\tR\bfilePath\"I\n" +
-	"\fScanResponse\x12!\n" +
+	"scanner.v1\".\n" +
+	"\x0fScanFileRequest\x12\x1b\n" +
+	"\tfile_path\x18\x01 \x01(\tR\bfilePath\"M\n" +
+	"\x10ScanFileResponse\x12!\n" +
 	"\fis_malicious\x18\x01 \x01(\bR\visMalicious\x12\x16\n" +
-	"\x06reason\x18\x02 \x03(\tR\x06reason2O\n" +
-	"\x0eScannerService\x12=\n" +
-	"\bScanFile\x12\x17.scanner.v1.ScanRequest\x1a\x18.scanner.v1.ScanResponseB9Z7github.com/ricehub-io/proto/gen/go/scanner/v1;scannerv1b\x06proto3"
+	"\x06reason\x18\x02 \x03(\tR\x06reason2W\n" +
+	"\x0eScannerService\x12E\n" +
+	"\bScanFile\x12\x1b.scanner.v1.ScanFileRequest\x1a\x1c.scanner.v1.ScanFileResponseB9Z7github.com/ricehub-io/proto/gen/go/scanner/v1;scannerv1b\x06proto3"
 
 var (
 	file_scanner_v1_scanner_proto_rawDescOnce sync.Once
@@ -145,12 +145,12 @@ func file_scanner_v1_scanner_proto_rawDescGZIP() []byte {
 
 var file_scanner_v1_scanner_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_scanner_v1_scanner_proto_goTypes = []any{
-	(*ScanRequest)(nil),  // 0: scanner.v1.ScanRequest
-	(*ScanResponse)(nil), // 1: scanner.v1.ScanResponse
+	(*ScanFileRequest)(nil),  // 0: scanner.v1.ScanFileRequest
+	(*ScanFileResponse)(nil), // 1: scanner.v1.ScanFileResponse
 }
 var file_scanner_v1_scanner_proto_depIdxs = []int32{
-	0, // 0: scanner.v1.ScannerService.ScanFile:input_type -> scanner.v1.ScanRequest
-	1, // 1: scanner.v1.ScannerService.ScanFile:output_type -> scanner.v1.ScanResponse
+	0, // 0: scanner.v1.ScannerService.ScanFile:input_type -> scanner.v1.ScanFileRequest
+	1, // 1: scanner.v1.ScannerService.ScanFile:output_type -> scanner.v1.ScanFileResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

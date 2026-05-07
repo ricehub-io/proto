@@ -4,14 +4,14 @@ package scanner.v1;
 option go_package = "github.com/ricehub-io/proto/gen/go/scanner/v1;scannerv1";
 
 service ScannerService {
-  rpc ScanFile(ScanRequest) returns (ScanResponse);
+  rpc ScanFile(ScanFileRequest) returns (ScanFileResponse);
 }
 
-message ScanRequest {
+message ScanFileRequest {
   string file_path = 1;
 }
 
-message ScanResponse {
+message ScanFileResponse {
   bool is_malicious = 1;
   repeated string reason = 2;
 }
